@@ -41,7 +41,7 @@ func New(cfg *config.Config) (*Manager, error) {
 		if err != nil {
 			// Clean up already created processes
 			for _, pp := range m.processes {
-				pp.Close()
+			_ = pp.Close()
 			}
 			return nil, fmt.Errorf("creating process %s: %w", pc.Name, err)
 		}
@@ -223,7 +223,7 @@ func (m *Manager) WaitForExit() {
 // Close releases all resources.
 func (m *Manager) Close() {
 	for _, p := range m.processes {
-		p.Close()
+		_ = p.Close()
 	}
 }
 

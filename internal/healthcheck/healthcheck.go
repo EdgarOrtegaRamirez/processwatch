@@ -70,7 +70,7 @@ func (c *Checker) checkHTTP(ctx context.Context) (bool, error) {
 	if err != nil {
 		return false, nil // Connection failed = unhealthy
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 
 	return resp.StatusCode >= 200 && resp.StatusCode < 400, nil
 }
@@ -92,7 +92,7 @@ func (c *Checker) checkTCP(ctx context.Context) (bool, error) {
 	if err != nil {
 		return false, nil // Connection failed = unhealthy
 	}
-	conn.Close()
+	_ = conn.Close()
 
 	return true, nil
 }
