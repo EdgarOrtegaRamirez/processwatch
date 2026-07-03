@@ -1,5 +1,5 @@
 # Binaries
-processwatch
+/processwatch
 *.exe
 *.exe~
 *.dll
