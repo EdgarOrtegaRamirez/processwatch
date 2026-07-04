@@ -142,7 +142,7 @@ func TestLoggerRotation(t *testing.T) {
 	defer func() { _ = l.Close() }()
 
 	// Write some data
-	l.WriteToStdout([]byte("test data\n"))
+	_, _ = l.WriteToStdout([]byte("test data\n"))
 
 	// Rotate should not error even with 0 max size
 	if err := l.Rotate(); err != nil {
@@ -163,7 +163,7 @@ func TestLoggerLargeMaxSize(t *testing.T) {
 		_, _ = l.WriteToStdout([]byte("test line\n"))
 	}
 
-	l.Rotate()
+	_ = l.Rotate()
 	// File should still be the same
 }
 

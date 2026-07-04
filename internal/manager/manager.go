@@ -110,7 +110,7 @@ func (m *Manager) StopAll() {
 	for _, name := range names {
 		p := m.processes[name]
 		if p.State() != process.StateStopped {
-			p.Stop()
+			_ = p.Stop()
 		}
 	}
 	fmt.Println("All processes stopped.")
@@ -154,8 +154,8 @@ func (m *Manager) StatusText() string {
 	}
 
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("%-20s %-12s %-8s %-10s %-8s %s\n",
-		"NAME", "STATE", "PID", "UPTIME", "RESTARTS", "HEALTH"))
+	fmt.Fprintf(&sb, "%-20s %-12s %-8s %-10s %-8s %s\n",
+		"NAME", "STATE", "PID", "UPTIME", "RESTARTS", "HEALTH")
 	sb.WriteString(strings.Repeat("-", 80) + "\n")
 
 	for _, info := range infos {
@@ -177,9 +177,9 @@ func (m *Manager) StatusText() string {
 			health = "-"
 		}
 
-		sb.WriteString(fmt.Sprintf("%s%-20s%s %-12s %-8s %-10s %-8d %s\n",
+		fmt.Fprintf(&sb, "%s%-20s%s %-12s %-8s %-10s %-8d %s\n",
 			stateColor, info.Name, resetColor,
-			info.State, pid, uptime, info.Restarts, health))
+			info.State, pid, uptime, info.Restarts, health)
 	}
 
 	return sb.String()

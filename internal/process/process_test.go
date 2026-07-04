@@ -45,7 +45,7 @@ func TestNewProcess(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer p.Close()
+	defer func() { _ = p.Close() }()
 
 	if p.Name() != "test-echo" {
 		t.Errorf("expected name 'test-echo', got %q", p.Name())
@@ -69,7 +69,7 @@ func TestProcessStartAndStop(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer p.Close()
+	defer func() { _ = p.Close() }()
 
 	// Start the process
 	if err := p.Start(); err != nil {
@@ -120,7 +120,7 @@ func TestProcessInfo(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer p.Close()
+	defer func() { _ = p.Close() }()
 
 	info := p.Info()
 	if info.Name != "info-test" {
@@ -147,7 +147,7 @@ func TestProcessName(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer p.Close()
+	defer func() { _ = p.Close() }()
 
 	if p.Name() != "named-process" {
 		t.Errorf("expected name 'named-process', got %q", p.Name())
@@ -190,12 +190,12 @@ func TestProcessInfoWhileRunning(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer p.Close()
+	defer func() { _ = p.Close() }()
 
 	if err := p.Start(); err != nil {
 		t.Fatalf("failed to start: %v", err)
 	}
-	defer p.Stop()
+	defer func() { _ = p.Stop() }()
 
 	time.Sleep(100 * time.Millisecond)
 

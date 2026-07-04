@@ -173,7 +173,7 @@ func (p *Process) Stop() error {
 
 	// Send stop signal outside of lock
 	if cmd != nil && cmd.Process != nil {
-		cmd.Process.Signal(sig)
+		_ = cmd.Process.Signal(sig)
 
 		// Wait for process to exit (with timeout)
 		select {
@@ -182,7 +182,7 @@ func (p *Process) Stop() error {
 		case <-time.After(timeout):
 			// Force kill
 			fmt.Printf("  [%s] Force killing (timeout)\n", p.config.Name)
-			cmd.Process.Kill()
+			_ = cmd.Process.Kill()
 			<-p.exitCh
 		}
 	}
