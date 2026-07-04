@@ -11,7 +11,7 @@ func TestNewLoggerToFile(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	// Write to stdout
 	n, err := l.WriteToStdout([]byte("hello stdout\n"))
@@ -45,7 +45,7 @@ func TestNewLoggerToStdout(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	// Should not error when writing to stdout
 	n, err := l.WriteToStdout([]byte("hello\n"))
@@ -62,7 +62,7 @@ func TestNewLoggerNoLogDir(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	// Without log dir, should write to os.Stdout/Stderr
 	n, err := l.WriteToStdout([]byte("test\n"))
@@ -96,7 +96,7 @@ func TestLoggerStdoutWriter(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	w := l.StdoutWriter()
 	if w == nil {
@@ -117,7 +117,7 @@ func TestLoggerStderrWriter(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	w := l.StderrWriter()
 	if w == nil {
@@ -139,7 +139,7 @@ func TestLoggerRotation(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	// Write some data
 	l.WriteToStdout([]byte("test data\n"))
@@ -156,11 +156,11 @@ func TestLoggerLargeMaxSize(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	// Write data - should not trigger rotation
 	for i := 0; i < 100; i++ {
-		l.WriteToStdout([]byte("test line\n"))
+		_, _ = l.WriteToStdout([]byte("test line\n"))
 	}
 
 	l.Rotate()
@@ -173,7 +173,7 @@ func TestNewLoggerCreateDir(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	defer l.Close()
+	defer func() { _ = l.Close() }()
 
 	// Verify directory was created
 	if _, err := os.Stat(dir); os.IsNotExist(err) {

@@ -274,7 +274,7 @@ func cmdInit() {
 	if _, err := os.Stat(outFile); err == nil {
 		fmt.Printf("File %s already exists. Overwrite? [y/N]: ", outFile)
 		var response string
-		fmt.Scanln(&response)
+		_, _ = fmt.Scanln(&response)
 		if response != "y" && response != "Y" {
 			fmt.Println("Aborted.")
 			return

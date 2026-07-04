@@ -117,11 +117,11 @@ func (l *Logger) checkRotate(f *os.File, bytes *int64, label string) {
 	rotated := name + ".1"
 
 	// Remove old rotated file
-	os.Remove(rotated)
+	_ = os.Remove(rotated)
 
 	// Close current, rename, reopen
 	_ = f.Close()
-	os.Rename(name, rotated)
+	_ = os.Rename(name, rotated)
 
 	newF, err := os.OpenFile(name, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0o644)
 	if err != nil {

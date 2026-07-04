@@ -271,12 +271,12 @@ programs:
 	if err != nil {
 		t.Fatalf("failed to create temp file: %v", err)
 	}
-	defer os.Remove(tmpFile.Name())
+	defer func() { _ = os.Remove(tmpFile.Name()) }()
 
 	if _, err := tmpFile.WriteString(content); err != nil {
 		t.Fatalf("failed to write temp file: %v", err)
 	}
-	tmpFile.Close()
+	_ = tmpFile.Close()
 
 	cfg, err := LoadFile(tmpFile.Name())
 	if err != nil {
