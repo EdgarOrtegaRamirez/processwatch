@@ -140,9 +140,9 @@ func TestDefaultProcessConfig(t *testing.T) {
 	}
 
 	pc := &ProcessConfig{
-		Name:         "test",
-		Command:      "echo",
-		Autorestart:  true,
+		Name:        "test",
+		Command:     "echo",
+		Autorestart: true,
 	}
 
 	DefaultProcessConfig(pc, global)
@@ -173,9 +173,9 @@ func TestDefaultProcessConfigDisabled(t *testing.T) {
 	}
 
 	pc := &ProcessConfig{
-		Name:         "test",
-		Command:      "echo",
-		Autorestart:  false,
+		Name:        "test",
+		Command:     "echo",
+		Autorestart: false,
 	}
 
 	DefaultProcessConfig(pc, global)

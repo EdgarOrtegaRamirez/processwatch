@@ -21,7 +21,7 @@ import (
 type State int
 
 const (
-	StateStopped  State = iota
+	StateStopped State = iota
 	StateStarting
 	StateRunning
 	StateBackoff

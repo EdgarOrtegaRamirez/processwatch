@@ -18,12 +18,12 @@ import (
 
 // Manager supervises multiple processes.
 type Manager struct {
-	config     *config.Config
-	processes  map[string]*process.Process
-	mu         sync.RWMutex
-	running    bool
-	signalCh   chan os.Signal
-	logDir     string
+	config    *config.Config
+	processes map[string]*process.Process
+	mu        sync.RWMutex
+	running   bool
+	signalCh  chan os.Signal
+	logDir    string
 }
 
 // New creates a new Manager from config.
@@ -41,7 +41,7 @@ func New(cfg *config.Config) (*Manager, error) {
 		if err != nil {
 			// Clean up already created processes
 			for _, pp := range m.processes {
-			_ = pp.Close()
+				_ = pp.Close()
 			}
 			return nil, fmt.Errorf("creating process %s: %w", pc.Name, err)
 		}

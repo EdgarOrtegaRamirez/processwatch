@@ -29,25 +29,25 @@ type GlobalConfig struct {
 
 // ProcessConfig defines a single process to supervise.
 type ProcessConfig struct {
-	Name            string            `yaml:"name" json:"name"`
-	Command         string            `yaml:"command" json:"command"`
-	Args            []string          `yaml:"args" json:"args"`
-	Dir             string            `yaml:"dir" json:"dir"`
-	Env             map[string]string `yaml:"env" json:"env"`
-	Autorestart     bool              `yaml:"autorestart" json:"autorestart"`
-	MaxRestarts     int               `yaml:"max_restarts" json:"max_restarts"`
-	RestartDelay    time.Duration     `yaml:"restart_delay" json:"restart_delay"`
-	BackoffFactor   float64           `yaml:"backoff_factor" json:"backoff_factor"`
-	MaxBackoff      time.Duration     `yaml:"max_backoff" json:"max_backoff"`
-	StdoutLog       string            `yaml:"stdout_log" json:"stdout_log"`
-	StderrLog       string            `yaml:"stderr_log" json:"stderr_log"`
-	StdoutLogMax    int64             `yaml:"stdout_log_max_mb" json:"stdout_log_max_mb"`
-	StderrLogMax    int64             `yaml:"stderr_log_max_mb" json:"stderr_log_max_mb"`
-	HealthCheck     *HealthCheckConfig `yaml:"healthcheck" json:"healthcheck"`
-	StopSignal      string            `yaml:"stop_signal" json:"stop_signal"`
-	StopTimeoutSec  int               `yaml:"stop_timeout" json:"stop_timeout"`
-	Enabled         bool              `yaml:"enabled" json:"enabled"`
-	ExitCodes       []int             `yaml:"exit_codes" json:"exit_codes"` // if set, only these are "clean" exits
+	Name           string             `yaml:"name" json:"name"`
+	Command        string             `yaml:"command" json:"command"`
+	Args           []string           `yaml:"args" json:"args"`
+	Dir            string             `yaml:"dir" json:"dir"`
+	Env            map[string]string  `yaml:"env" json:"env"`
+	Autorestart    bool               `yaml:"autorestart" json:"autorestart"`
+	MaxRestarts    int                `yaml:"max_restarts" json:"max_restarts"`
+	RestartDelay   time.Duration      `yaml:"restart_delay" json:"restart_delay"`
+	BackoffFactor  float64            `yaml:"backoff_factor" json:"backoff_factor"`
+	MaxBackoff     time.Duration      `yaml:"max_backoff" json:"max_backoff"`
+	StdoutLog      string             `yaml:"stdout_log" json:"stdout_log"`
+	StderrLog      string             `yaml:"stderr_log" json:"stderr_log"`
+	StdoutLogMax   int64              `yaml:"stdout_log_max_mb" json:"stdout_log_max_mb"`
+	StderrLogMax   int64              `yaml:"stderr_log_max_mb" json:"stderr_log_max_mb"`
+	HealthCheck    *HealthCheckConfig `yaml:"healthcheck" json:"healthcheck"`
+	StopSignal     string             `yaml:"stop_signal" json:"stop_signal"`
+	StopTimeoutSec int                `yaml:"stop_timeout" json:"stop_timeout"`
+	Enabled        bool               `yaml:"enabled" json:"enabled"`
+	ExitCodes      []int              `yaml:"exit_codes" json:"exit_codes"` // if set, only these are "clean" exits
 }
 
 // HealthCheckConfig defines health check parameters.
